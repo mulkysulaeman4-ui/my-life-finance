@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#173746">
+<meta name="description" content="Catatan gaji, anggaran mingguan, tabungan bisnis, dan dana darurat My Life Finance">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<title>My Life Finance</title>
+<style>
+:root{--navy:#173746;--teal:#267d78;--mint:#d9f0e8;--bg:#f4f7f8;--card:#fff;--ink:#172b35;--muted:#667983;--line:#e2eaed;--red:#b54747;--gold:#a46d1c}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,input,select{font:inherit}button{cursor:pointer}.app{max-width:760px;margin:auto;min-height:100vh;padding-bottom:30px}.hero{background:linear-gradient(135deg,#173746,#267d78);color:#fff;padding:28px 20px 24px;border-radius:0 0 26px 26px}.brand{display:flex;align-items:center;gap:12px}.logo{display:grid;place-items:center;background:#ffffff20;border:1px solid #ffffff30;border-radius:16px;width:50px;height:50px;font-size:25px}.brand h1{font-size:20px;margin:0}.brand p{margin:4px 0 0;color:#d0e5e8;font-size:12px}.hero .eyebrow{font-size:12px;color:#d0e5e8;margin:23px 0 3px}.hero .big{font-size:32px;font-weight:800;letter-spacing:-1px}.hero .sub{font-size:13px;color:#d0e5e8;margin-top:4px}.nav{display:flex;gap:8px;padding:14px 16px 4px;position:sticky;top:0;background:#f4f7f8ee;backdrop-filter:blur(10px);z-index:2}.nav button{flex:1;border:1px solid var(--line);background:white;color:var(--muted);padding:11px 5px;border-radius:12px;font-size:13px;font-weight:700}.nav button.active{background:var(--navy);color:white;border-color:var(--navy)}main{padding:14px 16px}.panel{display:none}.panel.active{display:block}.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:17px;margin-bottom:13px;box-shadow:0 3px 12px #17374608}.card h2{font-size:17px;margin:0 0 5px}.muted{color:var(--muted);font-size:13px;line-height:1.45}.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:13px}.stat{background:white;border:1px solid var(--line);border-radius:16px;padding:14px;min-width:0}.stat .label{font-size:12px;color:var(--muted)}.stat .value{font-size:20px;font-weight:800;margin-top:5px;overflow-wrap:anywhere}.green{color:var(--teal)}.red{color:var(--red)}.row{display:flex;align-items:center;justify-content:space-between;gap:12px}.row+.row{margin-top:13px}.field{display:flex;flex-direction:column;gap:6px;margin:13px 0}.field label{font-size:13px;font-weight:700}.field input,.field select{width:100%;border:1px solid #cfdbdf;border-radius:11px;padding:12px;background:#fff;color:var(--ink);outline-color:var(--teal)}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.btn{border:0;border-radius:12px;padding:12px 15px;font-weight:750;background:var(--teal);color:white}.btn.secondary{background:#e8f2f1;color:#205e5a}.btn.outline{background:white;color:var(--navy);border:1px solid var(--line)}.btn.danger{background:#fff0f0;color:var(--red)}.btn.full{width:100%}.budget-item{padding:12px 0;border-bottom:1px solid var(--line)}.budget-item:last-child{border-bottom:0}.budget-name{font-size:14px;font-weight:700}.budget-item input{width:145px;max-width:48%;text-align:right;border:1px solid #cfdbdf;border-radius:9px;padding:9px}.bar{height:7px;background:#e9eff1;border-radius:99px;overflow:hidden;margin-top:9px}.bar span{display:block;height:100%;background:var(--teal);border-radius:99px}.notice{padding:12px;border-radius:12px;background:#fff7e8;color:#80561a;font-size:13px;line-height:1.45}.notice.good{background:#eaf7f0;color:#236448}.log-item{border-bottom:1px solid var(--line);padding:12px 0}.log-item:last-child{border-bottom:0}.pill{font-size:11px;border-radius:99px;padding:4px 8px;background:#e8f2f1;color:#205e5a;font-weight:700}.empty{text-align:center;color:var(--muted);padding:20px 0;font-size:13px}.footer{text-align:center;color:var(--muted);font-size:11px;padding:10px 24px 24px}.small{font-size:12px}.hidden{display:none!important}@media(min-width:600px){.hero{margin-top:16px;border-radius:26px}.nav{top:8px;border-radius:16px}.app{padding:0 12px 30px}.hero{padding:30px}.stats{grid-template-columns:repeat(4,1fr)}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="hero">
+  <div class="brand"><div class="logo">🌱</div><div><h1>My Life Finance</h1><p>Atur uang hari ini, bangun usaha esok hari.</p></div></div>
+  <div class="eyebrow">TOTAL GAJI TERCATAT</div>
+  <div class="big" id="heroTotal">Rp0</div>
+  <div class="sub" id="heroSub">Mulai catat gaji freelance yang benar-benar diterima.</div>
+</header>
+<nav class="nav">
+  <button class="active" data-tab="home">Ringkasan</button>
+  <button data-tab="budget">Anggaran</button>
+  <button data-tab="records">Catatan gaji</button>
+  <button data-tab="plan">Proyeksi</button>
+</nav>
+<main>
+<section class="panel active" id="home">
+  <div class="stats">
+    <div class="stat"><div class="label">Gaji masuk</div><div class="value green" id="statIncome">Rp0</div></div>
+    <div class="stat"><div class="label">Modal usaha</div><div class="value" id="statBusiness">Rp0</div></div>
+    <div class="stat"><div class="label">Dana cadangan</div><div class="value" id="statReserve">Rp0</div></div>
+    <div class="stat"><div class="label">Sisa alokasi</div><div class="value" id="statLeft">Rp0</div></div>
+  </div>
+  <div class="card">
+    <h2>Catat gaji baru</h2><p class="muted">Masukkan hanya gaji yang sudah kamu terima. Jika tidak dipanggil kerja, tidak perlu mencatat gaji.</p>
+    <div class="grid2">
+      <div class="field"><label>Tanggal diterima</label><input id="payDate" type="date"></div>
+      <div class="field"><label>Jumlah gaji (Rp)</label><input id="payAmount" type="number" min="0" step="1000" value="2000000"></div>
+    </div>
+    <div class="field"><label>Catatan (opsional)</label><input id="payNote" maxlength="100" placeholder="Contoh: proyek minggu pertama"></div>
+    <button class="btn full" id="addPay">＋ Simpan gaji masuk</button>
+  </div>
+  <div class="card">
+    <div class="row"><div><h2>Rencana pembagian mingguan</h2><div class="muted">Berdasarkan anggaran yang kamu atur.</div></div><span class="pill" id="budgetStatus">Seimbang</span></div>
+    <div id="homeBudget"></div>
+    <div class="row" style="padding-top:14px"><strong>Total alokasi</strong><strong id="budgetTotal">Rp0</strong></div>
+  </div>
+  <div class="notice">Tips: pisahkan uang keluarga, operasional perusahaan, dana cadangan, dan modal usaha. Anggaran operasional adalah batas rencana, bukan kewajiban setor jika tidak ada kebutuhan nyata.</div>
+</section>
+<section class="panel" id="budget">
+  <div class="card">
+    <h2>Anggaran per gaji Rp2 juta</h2><p class="muted">Ubah nominal sesuai kebutuhan. Angka ini adalah rencana pembagian setiap kali kamu menerima gaji mingguan penuh.</p>
+    <div class="field"><label>Target gaji mingguan (Rp)</label><input id="weeklyIncome" type="number" min="0" step="10000" value="2000000"></div>
+    <div class="field"><label>Hari kerja per minggu</label><select id="workDays"><option value="3">3 hari</option><option value="4">4 hari</option><option value="5" selected>5 hari</option></select></div>
+    <div id="budgetInputs"></div>
+    <div class="notice" id="budgetWarning" style="margin-top:14px"></div>
+    <div class="row" style="padding:15px 0 4px"><span>Total anggaran</span><strong id="editTotal">Rp0</strong></div>
+    <div class="row"><span>Sisa / kekurangan</span><strong id="editLeft">Rp0</strong></div>
+    <button class="btn full" id="saveBudget" style="margin-top:16px">Simpan anggaran</button>
+  </div>
+  <div class="card">
+    <h2>Uang jajan adik</h2><p class="muted">Rp5.000 per hari, termasuk di dalam pos sekolah & jajan adik agar tidak terhitung dua kali.</p>
+    <div class="field"><label>Hari jajan per minggu</label><select id="snackDays"><option value="5" selected>5 hari sekolah — Rp25.000</option><option value="6">6 hari — Rp30.000</option><option value="7">7 hari — Rp35.000</option></select></div>
+    <div class="row"><span>Jajan adik per minggu</span><strong id="snackTotal">Rp25.000</strong></div>
+    <div class="row"><span>Sisa pos sekolah untuk kebutuhan lain</span><strong id="schoolLeft">Rp225.000</strong></div>
+  </div>
+</section>
+<section class="panel" id="records">
+  <div class="card">
+    <div class="row"><div><h2>Riwayat gaji</h2><p class="muted">Catatan disimpan di browser pada perangkat ini.</p></div><button class="btn outline" id="exportCsv">Ekspor CSV</button></div>
+    <div id="history"></div>
+    <div class="row" style="margin-top:14px"><button class="btn secondary" id="exportJson">Cadangkan data</button><button class="btn outline" id="importBtn">Pulihkan data</button><input id="importFile" class="hidden" type="file" accept=".json,application/json"></div>
+  </div>
+</section>
+<section class="panel" id="plan">
+  <div class="card">
+    <h2>Proyeksi sampai akhir proyek</h2><p class="muted">Proyeksi bukan jaminan. Pilih jumlah minggu yang benar-benar kamu perkirakan akan dibayar.</p>
+    <div class="field"><label>Minggu bergaji dari 7 minggu</label><input id="paidWeeks" type="range" min="0" max="7" value="4"><div class="row"><span class="muted">0 minggu</span><strong id="weeksLabel">4 minggu</strong><span class="muted">7 minggu</span></div></div>
+    <div class="stats">
+      <div class="stat"><div class="label">Perkiraan pendapatan</div><div class="value" id="forecastIncome">Rp8.000.000</div></div>
+      <div class="stat"><div class="label">Modal usaha</div><div class="value green" id="forecastBusiness">Rp2.400.000</div></div>
+      <div class="stat"><div class="label">Dana cadangan</div><div class="value" id="forecastReserve">Rp800.000</div></div>
+      <div class="stat"><div class="label">Sisa setelah alokasi</div><div class="value" id="forecastLeft">Rp800.000</div></div>
+    </div>
+    <div id="forecastDetails"></div>
+    <div class="notice">Karena jadwal rolling belum pasti, prioritaskan kebutuhan rumah dan biaya hidup saat tidak bekerja sebelum menetapkan jumlah tabungan yang bisa dikunci.</div>
+  </div>
+</section>
+</main>
+<div class="footer">My Life Finance • Versi awal pribadi<br>Data disimpan secara lokal di browser. Ekspor cadangan secara berkala.</div>
+</div>
+<script>
+const KEY='myLifeFinance_v1';
+const defaults={weeklyIncome:2000000,workDays:5,budget:[
+ {id:'mamah',name:'Mamah',value:400000},
+ {id:'school',name:'Sekolah & jajan adik',value:250000},
+ {id:'personal',name:'Kebutuhan pribadi',value:350000},
+ {id:'ops',name:'Operasional perusahaan',value:200000},
+ {id:'business',name:'Modal usaha sendiri',value:600000},
+ {id:'reserve',name:'Dana cadangan',value:200000}
+],snackDays:5,payments:[]};
+let state=load();
+function load(){try{return {...structuredClone(defaults),...JSON.parse(localStorage.getItem(KEY)||'{}')}}catch(e){return structuredClone(defaults)}}
+function persist(){localStorage.setItem(KEY,JSON.stringify(state));render()}
+function money(n){return new Intl.NumberFormat('id-ID',{style:'currency',currency:'IDR',maximumFractionDigits:0}).format(Math.round(Number(n)||0))}
+function totalBudget(){return state.budget.reduce((s,b)=>s+Math.max(0,Number(b.value)||0),0)}
+function totalIncome(){return state.payments.reduce((s,p)=>s+p.amount,0)}
+function budgetBy(id){return state.budget.find(b=>b.id===id)?.value||0}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+document.querySelectorAll('.nav button').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b===btn));document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active',p.id===btn.dataset.tab));}));
+function budgetHtml(){return state.budget.map(b=>`<div class="budget-item"><div class="row"><span class="budget-name">${escapeHtml(b.name)}</span><strong>${money(b.value)}</strong></div><div class="bar"><span style="width:${state.weeklyIncome?Math.max(0,Math.min(100,b.value/state.weeklyIncome*100)):0}%"></span></div></div>`).join('')}
+function renderBudgetInputs(){document.getElementById('budgetInputs').innerHTML=state.budget.map(b=>`<div class="budget-item"><div class="row"><label class="budget-name" for="b-${b.id}">${escapeHtml(b.name)}</label><input id="b-${b.id}" type="number" min="0" step="10000" value="${b.value}" data-budget="${b.id}"></div></div>`).join('');document.querySelectorAll('[data-budget]').forEach(inp=>inp.addEventListener('input',()=>{let b=state.budget.find(x=>x.id===inp.dataset.budget);if(b)b.value=Math.max(0,Number(inp.value)||0);updateBudgetPreview()}))}
+function updateBudgetPreview(){let t=totalBudget(),inc=Number(document.getElementById('weeklyIncome').value)||0,left=inc-t;document.getElementById('editTotal').textContent=money(t);let el=document.getElementById('editLeft');el.textContent=money(left);el.className=left<0?'red':'green';document.getElementById('budgetWarning').textContent=left<0?'Anggaran melebihi gaji sebesar '+money(-left)+'. Kurangi alokasi sebelum menyimpan.':left>0?'Masih ada '+money(left)+' yang belum dialokasikan. Kamu bisa menjadikannya dana cadangan.':'Anggaran seimbang dengan gaji mingguan.';document.getElementById('budgetWarning').className='notice'+(left>=0?' good':'');let snack=Number(document.getElementById('snackDays').value||5)*5000;document.getElementById('snackTotal').textContent=money(snack);document.getElementById('schoolLeft').textContent=money(budgetBy('school')-snack);document.getElementById('schoolLeft').className=budgetBy('school')<snack?'red':'green'}
+function renderHistory(){let el=document.getElementById('history');if(!state.payments.length){el.innerHTML='<div class="empty">Belum ada gaji yang dicatat.<br>Simpan gaji pertamamu dari halaman Ringkasan.</div>';return}el.innerHTML=[...state.payments].reverse().map(p=>`<div class="log-item"><div class="row"><div><strong>${money(p.amount)}</strong><div class="muted">${escapeHtml(p.date)}${p.note?' · '+escapeHtml(p.note):''}</div></div><button class="btn danger small" data-delete="${p.id}">Hapus</button></div></div>`).join('');document.querySelectorAll('[data-delete]').forEach(b=>b.onclick=()=>{if(confirm('Hapus catatan gaji ini?')){state.payments=state.payments.filter(p=>p.id!==b.dataset.delete);persist()}})}
+function renderForecast(){let w=Number(document.getElementById('paidWeeks').value||0),inc=Number(state.weeklyIncome)||0;document.getElementById('weeksLabel').textContent=w+' minggu';document.getElementById('forecastIncome').textContent=money(inc*w);document.getElementById('forecastBusiness').textContent=money(budgetBy('business')*w);document.getElementById('forecastReserve').textContent=money(budgetBy('reserve')*w);document.getElementById('forecastLeft').textContent=money((inc-totalBudget())*w);document.getElementById('forecastDetails').innerHTML=state.budget.map(b=>`<div class="row" style="padding:8px 0;border-bottom:1px solid var(--line)"><span class="muted">${escapeHtml(b.name)}</span><strong>${money(b.value*w)}</strong></div>`).join('')}
+function render(){document.getElementById('weeklyIncome').value=state.weeklyIncome;document.getElementById('workDays').value=state.workDays;document.getElementById('snackDays').value=state.snackDays;let inc=totalIncome(),t=totalBudget(),left=Number(state.weeklyIncome)-t;document.getElementById('heroTotal').textContent=money(inc);document.getElementById('heroSub').textContent=state.payments.length?state.payments.length+' catatan gaji tersimpan. Total yang tercatat, bukan proyeksi.':'Mulai catat gaji freelance yang benar-benar diterima.';document.getElementById('statIncome').textContent=money(inc);document.getElementById('statBusiness').textContent=money(state.payments.reduce((s,p)=>s+Math.min(p.amount,budgetBy('business')),0));document.getElementById('statReserve').textContent=money(state.payments.reduce((s,p)=>s+Math.min(p.amount,budgetBy('reserve')),0));document.getElementById('statLeft').textContent=money(left);document.getElementById('statLeft').className='value '+(left<0?'red':'green');document.getElementById('homeBudget').innerHTML=budgetHtml();document.getElementById('budgetTotal').textContent=money(t);document.getElementById('budgetStatus').textContent=left<0?'Melebihi gaji':left>0?'Ada sisa':'Seimbang';document.getElementById('budgetStatus').style.background=left<0?'#fff0f0':'#e8f2f1';document.getElementById('budgetStatus').style.color=left<0?'#b54747':'#205e5a';renderBudgetInputs();updateBudgetPreview();renderHistory();renderForecast()}
+document.getElementById('weeklyIncome').addEventListener('input',e=>{state.weeklyIncome=Math.max(0,Number(e.target.value)||0);updateBudgetPreview();renderForecast()});
+document.getElementById('workDays').addEventListener('change',e=>{state.workDays=Number(e.target.value);persist()});
+document.getElementById('snackDays').addEventListener('change',e=>{state.snackDays=Number(e.target.value);persist()});
+document.getElementById('saveBudget').addEventListener('click',()=>{state.weeklyIncome=Math.max(0,Number(document.getElementById('weeklyIncome').value)||0);if(totalBudget()>state.weeklyIncome){alert('Total anggaran masih melebihi gaji. Silakan sesuaikan dulu.');return}persist();alert('Anggaran berhasil disimpan di browser ini.')});
+document.getElementById('addPay').addEventListener('click',()=>{let amount=Math.max(0,Number(document.getElementById('payAmount').value)||0);if(!amount){alert('Masukkan jumlah gaji yang valid.');return}state.payments.push({id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),date:document.getElementById('payDate').value||new Date().toISOString().slice(0,10),amount,note:document.getElementById('payNote').value.trim()});document.getElementById('payNote').value='';persist();alert('Catatan gaji tersimpan.');document.querySelector('[data-tab="records"]').click()});
+document.getElementById('paidWeeks').addEventListener('input',renderForecast);
+document.getElementById('exportCsv').addEventListener('click',()=>{let rows=[['Tanggal','Jumlah gaji','Catatan'],...state.payments.map(p=>[p.date,p.amount,p.note])];let csv=rows.map(r=>r.map(x=>'"'+String(x).replace(/"/g,'""')+'"').join(',')).join('\r\n');download('catatan-gaji.csv',csv,'text/csv;charset=utf-8')});
+document.getElementById('exportJson').addEventListener('click',()=>download('my-life-finance-backup.json',JSON.stringify(state,null,2),'application/json'));
+function download(name,data,type){let blob=new Blob([data],{type}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
+document.getElementById('importBtn').addEventListener('click',()=>document.getElementById('importFile').click());
+document.getElementById('importFile').addEventListener('change',async e=>{let f=e.target.files[0];if(!f)return;try{let v=JSON.parse(await f.text());if(!Array.isArray(v.budget)||!Array.isArray(v.payments))throw Error();state={...structuredClone(defaults),...v};persist();alert('Cadangan berhasil dipulihkan.')}catch(err){alert('File cadangan tidak valid.')}e.target.value=''});
+document.getElementById('payDate').value=new Date().toISOString().slice(0,10);
+render();
+</script>
+<script>if ("serviceWorker" in navigator) { window.addEventListener("load", () => navigator.serviceWorker.register("./service-worker.js").catch(() => {})); }</script>
+</body>
+</html>
